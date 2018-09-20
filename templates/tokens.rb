@@ -1,4 +1,4 @@
-class CreateTokens < ActiveRecord::Migration
+class CreateTokens < ActiveRecord::Migration[5.2]
   def change
     create_table :tokens do |t|
       t.string      :name, null: false
@@ -8,8 +8,6 @@ class CreateTokens < ActiveRecord::Migration
       t.datetime    :expires_at, null: true
       t.datetime    :created_at, null: false
     end
-
-    add_index :tokens, [:tokenizable_type, :tokenizable_id]
     add_index :tokens, :token
     add_index :tokens, :expires_at
     add_index :tokens, [:tokenizable_id, :tokenizable_type, :name], unique: true
